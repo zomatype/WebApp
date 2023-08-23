@@ -1,24 +1,20 @@
 <template>
   <div id="app">
-    <AppHeader/>
-    <Home/>
-    <AppFooter/>
+    <div 
+      id="nav" 
+      class="tab-area-base">
+      <ul class="tab-menu-base">
+        <!-- `router.js` で定義したルーティングルールとの紐付けを行っている -->
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/list">Rounting Test</router-link></li>
+      </ul>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import AppHeader from './components/modules/AppHeader'
-import AppFooter from './components/modules/AppFooter.vue'
-import Home from './components/pages/TopPage.vue'
 
-export default {
-  name: 'App',
-  components: {
-    Home,
-    AppHeader,
-    AppFooter,
-  },
-};
 </script>
 
 <style>
