@@ -1,22 +1,28 @@
 <template>
   <div id="app">
-    <AppHeader/>
-    <Home/>
-    <AppFooter/>
+    <Header />
+    <div 
+      id="nav" 
+      class="tab-area-base">
+      <ul class="tab-menu-base">
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/list">Rounting Test</router-link></li>
+      </ul>
+    </div>
+    <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
-import AppHeader from './components/modules/AppHeader'
-import AppFooter from './components/modules/AppFooter.vue'
-import Home from './components/pages/TopPage.vue'
+import Header from './components/modules/AppHeader.vue';
+import Footer from './components/modules/AppFooter.vue';
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Home,
-    AppHeader,
-    AppFooter,
+    Header,
+    Footer
   },
 };
 </script>
