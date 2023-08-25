@@ -11,9 +11,34 @@
 
 <script>
 export default {
-    name: 'PreviewList'
+    name: 'PreviewList',
+    data() {
+        return {
+            uploadedScores: []
+        };
+    },
+    created() {
+        this.fetchUploadedScores();
+    },
+    methods: {
+        async fetchUploadedScores() {
+            try {
+                const response = await fetch('http://localhost:5000/api/files');
+                if (response.ok) {
+                    const data = await response.json();
+                    this.uploadedScores = data.files.map(file => ({
+                        name: file.filename,
+                        url: `http://localhost:5000/api/download/${encodeURIComponent(file.filename)}`
+                    }));
+                } else {
+                    console.error('Failed to fetch uploaded scores');
+                }
+            } catch (error) {
+                console.error('Error fetching uploaded scores', error);
+            }
+        }
+    }
 }
-
 </script>
 
 <style scoped>
