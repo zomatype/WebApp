@@ -3,7 +3,7 @@
         <img  src="../../assets/logo.png">
         <h1>App Name</h1>
         <input type="file" @change="handleFileUpload" accept=".pdf"/>
-        <b-button disabled size="lg" variant="primary">Upload</b-button>
+        <b-button  size="lg" variant="primary">Upload</b-button>
         <div v-if="uploadedFile">
             <h2>アップロードされた楽譜</h2>
             <img v-if="isImageFile" :src="uploadedFile" alt="アップロードされた楽譜" />
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-    name: 'Home'
+    name: 'HomeHomepurin'
 }
 </script>
 <style scoped>
