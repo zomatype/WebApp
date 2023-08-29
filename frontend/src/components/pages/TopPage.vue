@@ -3,7 +3,7 @@
         <img  src="../../assets/logo.png">
         <h1>App Name</h1>
         <input type="file" @change="handleFileUpload" accept=".pdf"/>
-        <b-button disabled size="lg" variant="primary">Upload</b-button>
+        <b-button  size="lg" variant="primary">Upload</b-button>
         <div v-if="uploadedFile">
             <h2>アップロードされた楽譜</h2>
             <img v-if="isImageFile" :src="uploadedFile" alt="アップロードされた楽譜" />
@@ -13,7 +13,45 @@
 </template>
 <script>
 export default {
-    name: 'Home'
+    name: 'HomeHomepurin',
+    data() {
+        return {
+            selectedFile: null,
+            uploadedFile: null,
+            isImageFile: false
+        };
+    },
+    methods: {
+        handleFileUpload(event) {
+            this.selectedFile = event.target.files[0];
+        },
+        async uploadFile() {
+            if (!this.selectedFile) {
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    console.log('File uploaded successfully');
+                    this.fetchFileList();
+                } else {
+                    console.error('File upload failed');
+                }
+            } catch (error) {
+                console.error('Error uploading file', error);
+            }
+        },
+        // 別のメソッドとして一覧を取得するfetchFileList()を追加する必要があります
+    },
+    // その他のコンポーネントオプションを追加する必要があります
 }
 </script>
 <style scoped>
