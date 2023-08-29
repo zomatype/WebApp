@@ -24,7 +24,6 @@ def upload_file():
 
     filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(filename)
-
     pdf_file = PDFFile(filename=file.filename)
     db.session.add(pdf_file)
     db.session.commit()
