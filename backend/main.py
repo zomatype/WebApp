@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-from app import db
-from app.models import PDFFile
+from ..frontend.src.App import db
+from ..frontend.src.App.models import PDFFile
 
 app = Flask(__name__)
 CORS(app)
