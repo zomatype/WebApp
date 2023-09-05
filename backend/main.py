@@ -6,19 +6,17 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# データベースの設定
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
-# モデルの定義
 class PDFFile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
 
-# ファイルアップロードの設定
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+#ファイルのアップロード
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -37,6 +35,7 @@ def upload_file():
 
     return jsonify({'message': 'File uploaded successfully'}), 200
 
+# 表示
 @app.route('/api/files', methods=['GET'])
 def get_files():
     files = PDFFile.query.all()
