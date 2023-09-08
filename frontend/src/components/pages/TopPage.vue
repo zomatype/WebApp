@@ -49,9 +49,9 @@ export default {
                 console.error('Error uploading file', error);
             }
         },
-        // 別のメソッドとして一覧を取得するfetchFileList()を追加する必要があります
+        
     },
-    // その他のコンポーネントオプションを追加する必要があります
+    
 }
 </script>
 <style scoped>
