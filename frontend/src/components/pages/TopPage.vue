@@ -1,9 +1,9 @@
 <template>
     <div class="home-page">
-        <img  src="../../assets/logo.png">
+        <img src="../../assets/logo.png">
         <h1>App Name</h1>
         <input type="file" @change="handleFileUpload" accept=".pdf"/>
-        <b-button  size="lg" variant="primary">Upload</b-button>
+        <b-button size="lg" variant="primary" @click="uploadFile">Upload</b-button>
         <div v-if="uploadedFile">
             <h2>アップロードされた楽譜</h2>
             <img v-if="isImageFile" :src="uploadedFile" alt="アップロードされた楽譜" />
@@ -34,7 +34,7 @@ export default {
             formData.append('file', this.selectedFile);
 
             try {
-                const response = await fetch('http://localhost:5000/api/upload', {
+                const response = await fetch('http://127.0.0.1:5000/upload', {
                     method: 'POST',
                     body: formData,
                 });
@@ -49,9 +49,9 @@ export default {
                 console.error('Error uploading file', error);
             }
         },
-        // 別のメソッドとして一覧を取得するfetchFileList()を追加する必要があります
+        
     },
-    // その他のコンポーネントオプションを追加する必要があります
+    
 }
 </script>
 <style scoped>
