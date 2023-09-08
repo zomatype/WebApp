@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import os
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__, static_folder='../frontend/dist/static', template_folder='../frontend/dist')
+cors = CORS(app, supports_credentials=True)
+
 
 # データベースの設定
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'

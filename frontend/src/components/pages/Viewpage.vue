@@ -23,12 +23,12 @@ export default {
     methods: {
         async fetchUploadedScores() {
             try {
-                const response = await fetch('http://localhost:5000/files');
+                const response = await fetch('http://127.0.0.1:5000/files');
                 if (response.ok) {
                     const data = await response.json();
                     this.uploadedScores = data.files.map(file => ({
                         name: file.filename,
-                        url: `http://localhost:5000/download/${encodeURIComponent(file.filename)}`
+                        url: `http://127.0.0.1:5000/download/${encodeURIComponent(file.filename)}`
                     }));
                 } else {
                     console.error('Failed to fetch uploaded scores');
