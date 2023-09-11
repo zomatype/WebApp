@@ -1,11 +1,14 @@
 <template>
     <div class="uploaded-scores">
+        <img src="../../assets/logo.png">
         <h1>アップロードした楽譜一覧</h1>
         <ul>
             <li v-for="(score, index) in uploadedScores" :key="index">
                 <a :href="score.url" :download="score.name">{{ score.name }}</a>
             </li>
         </ul>
+        
+        <div v-if="uploadedScores.length === 0">ファイルがアップロードされていません。</div>
     </div>
 </template>
 

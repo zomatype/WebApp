@@ -1,9 +1,14 @@
 <template>
-    <div class="home-page">
+<div class="home-page">
         <img src="../../assets/logo.png">
         <h1>App Name</h1>
         <input type="file" @change="handleFileUpload" accept=".pdf"/>
         <b-button size="lg" variant="primary" @click="uploadFile">Upload</b-button>
+        
+        <div v-if="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
+        
         <div v-if="uploadedFile">
             <h2>アップロードされた楽譜</h2>
             <img v-if="isImageFile" :src="uploadedFile" alt="アップロードされた楽譜" />
@@ -18,15 +23,18 @@ export default {
         return {
             selectedFile: null,
             uploadedFile: null,
-            isImageFile: false
+            isImageFile: false,
+            errorMessage: '' 
         };
     },
     methods: {
         handleFileUpload(event) {
             this.selectedFile = event.target.files[0];
+            this.errorMessage = '';
         },
         async uploadFile() {
             if (!this.selectedFile) {
+                this.errorMessage = 'ファイルを選択してください。';
                 return;
             }
 
@@ -44,9 +52,11 @@ export default {
                     this.fetchFileList();
                 } else {
                     console.error('File upload failed');
+                    this.errorMessage = 'ファイルのアップロードに失敗しました。';
                 }
             } catch (error) {
                 console.error('Error uploading file', error);
+                this.errorMessage = 'ファイルのアップロード中にエラーが発生しました。';
             }
         },
         
@@ -87,6 +97,11 @@ img {
 iframe {
     width: 100%;
     height: 500px;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: red;
     margin-bottom: 10px;
 }
 </style>

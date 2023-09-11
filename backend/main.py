@@ -50,5 +50,10 @@ def get_files():
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+@app.after_request
+def set_cors_header(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 if __name__ == '__main__':
     app.run(debug=True)
